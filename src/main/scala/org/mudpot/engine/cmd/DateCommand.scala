@@ -2,7 +2,7 @@ package org.mudpot.engine.cmd
 
 import java.util.Date
 
-import org.mudpot.engine.{SimpleEngine, Command}
+import org.mudpot.engine.{Command, SimpleEngine}
 
 
 class DateCommand extends Command {
@@ -19,6 +19,11 @@ object DateCommand {
   def main(args: Array[String]) {
     val engine = new SimpleEngine
     engine.addCommand(new DateCommand)
-    println(engine.handle("date"))
+    println(engine.handle("date engine"))
+    println(engine.handle(""))
+    println(engine.handle(""))
+    println(engine.handle("giberish"))
+    println(engine.handle(""))
+    println(engine.handle(""))
   }
 }
