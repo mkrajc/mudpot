@@ -8,8 +8,6 @@ import org.mudpot.engine.{Command, SimpleEngine}
 class DateCommand extends Command {
   override def name: String = "date"
 
-  override def aliases: Array[String] = ???
-
   override def pattern: String = ???
 
   override def execute(args: List[String]): String = new Date().toString

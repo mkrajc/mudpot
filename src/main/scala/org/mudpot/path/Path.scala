@@ -1,4 +1,4 @@
-package org.mudpot.location
+package org.mudpot.path
 
 import java.security.MessageDigest
 
@@ -19,6 +19,8 @@ case class Path(parts: List[String]) {
 }
 
 object Path {
+  def apply(text: String): Path = Path(text.split('/').filterNot(_.isEmpty).toList)
+
   private val digest = MessageDigest.getInstance("SHA")
 
   def sha(s: String): String = digest.digest(s.getBytes).map("%02x".format(_)).mkString

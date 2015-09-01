@@ -14,8 +14,6 @@ trait Command {
 
   def name: String
 
-  def aliases: Array[String]
-
   def pattern: String
 
   def execute(args: List[String]): String

@@ -11,9 +11,6 @@ object UnknownCommand extends Command {
     "What I was trying to say?"
   )
 
-
-  override def aliases: Array[String] = ???
-
   override def pattern: String = ???
 
   override def execute(args: List[String]): String = {

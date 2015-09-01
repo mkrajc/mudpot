@@ -23,4 +23,15 @@ class Tokenizer$Test extends FlatSpec with Matchers{
     val tokens = Tokenizer.tokenize(" \t")
     tokens should be(Nil)
   }
+
+  it should "trim space in the sentence" in {
+    val trimmed = Tokenizer.trim(" Look  at the\tsun.\n")
+    trimmed should be("Look at the sun.")
+  }
+
+  it should "not trim empty sentence" in {
+    val trimmed = Tokenizer.trim("")
+    trimmed should be("")
+  }
+
 }
