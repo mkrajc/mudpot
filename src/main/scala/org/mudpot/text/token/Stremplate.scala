@@ -1,4 +1,4 @@
-package org.mudpot.engine.token
+package org.mudpot.text.token
 
 case class Stremplate(pattern: String) {
 

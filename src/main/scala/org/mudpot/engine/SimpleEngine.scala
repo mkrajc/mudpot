@@ -1,7 +1,7 @@
 package org.mudpot.engine
 
 import org.mudpot.engine.cmd.UnknownCommand
-import org.mudpot.engine.token.Tokenizer
+import org.mudpot.text.token.Tokenizer
 
 
 class SimpleEngine extends Engine with Commands {
