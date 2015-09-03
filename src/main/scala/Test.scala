@@ -1,23 +1,13 @@
-import org.mudpot.engine.SimpleEngine
-import org.mudpot.engine.cmd.DateCommand
 
-import scala.io.StdIn
+
+import org.mudpot.io.Files
 
 object Test {
   def main(args: Array[String]) {
-    println("test")
 
-    val engine = new SimpleEngine
-    engine.addCommand(new DateCommand)
+    val file = Files.fromPath("./test/abc.txt")
+    file.getParent.createFile("/abc/cde.txt").createFull()
 
-    var line: String = ""
-    while (true)  {
-      line = StdIn.readLine()
-      println(engine.handle(line))
-      if ("exit" == line) {
-        return
-      }
-    }
 
 
   }
