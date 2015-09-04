@@ -8,7 +8,5 @@ object Test {
     val file = Files.fromPath("./test/abc.txt")
     file.getParent.createFile("/abc/cde.txt").createFull()
 
-
-
   }
 }
