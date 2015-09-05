@@ -2,6 +2,7 @@ package org.mudpot.text.parser.exp
 
 import org.mudpot.text.Input
 import org.mudpot.text.parser._
+import org.mudpot.text.token.Tokenizer
 
 case class ExpressionPattern(expressions: List[Expression]) extends Pattern {
   override def parse(input: Input): Matcher = {
@@ -17,7 +18,7 @@ case class ExpressionPattern(expressions: List[Expression]) extends Pattern {
 
       if (wordsOk) {
         val argsMap = placeholders.map { p => (p._1.asInstanceOf[Placeholder].arg, p._2) }.toMap
-        OkMatch(new ParsedInputMap(argsMap))
+        OkMatch(new ParsedInputMap(this, argsMap))
       } else NoMatch
     }
   }
@@ -34,4 +35,15 @@ case class ExpressionPattern(expressions: List[Expression]) extends Pattern {
 
   override val arguments: List[String] = expressions.collect { case c: Placeholder => c.arg }
 
+  override def toString: String = expressions.mkString(" ")
+}
+
+object ExpressionPattern {
+  def from(text: String): ExpressionPattern = {
+    val expressions: List[Expression] = Tokenizer.tokenize(text).map(p => {
+      if (p.startsWith("$")) Placeholder(p.substring(1))
+      else Word(p)
+    })
+    ExpressionPattern(expressions)
+  }
 }

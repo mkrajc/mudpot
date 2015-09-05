@@ -1,23 +1,25 @@
 package org.mudpot.path
 
-import java.io.File
 
 import org.mudpot.conf.Paths
+import org.mudpot.io._
 
 
-trait PathResolver {
-  def resolveToFile(path: Path)(implicit paths: Paths): File
+trait PathResolver[A <: FSNode] {
+  def resolveToFile(path: Path)(implicit paths: Paths): A
 }
 
-class UniquePathResolver extends PathResolver {
+class UniquePathResolver extends PathResolver[Directory] {
 
-  override def resolveToFile(path: Path)(implicit paths: Paths): File = {
+  override def resolveToFile(path: Path)(implicit paths: Paths): Directory = {
     val first = path.unique.take(6)
-    val dir = first.grouped(2).mkString("/")
-    new File(paths.root, dir)
+    val dir = first.grouped(2).mkString("/","/","")
+    Directories.fromPath(paths.root.getPath + dir)
   }
 }
 
-class UniqueFileNamePathResolver(val name: String) extends UniquePathResolver {
-  override def resolveToFile(path: Path)(implicit paths: Paths): File = new File(super.resolveToFile(path), name)
+class UniqueFileNamePathResolver(val name: String) extends PathResolver[File] {
+  private val dirResolver = new UniquePathResolver
+
+  override def resolveToFile(path: Path)(implicit paths: Paths): File = dirResolver.resolveToFile(path).createFile(name)
 }

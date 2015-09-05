@@ -1,18 +1,23 @@
 package org.mudpot.conf
 
+import org.mudpot.io.{Directories, Directory}
+
 trait Paths {
-  def root: String
+  def root: Directory
+  def confDir: Directory = root.createDir("conf")
+  def parserDir: Directory = confDir.createDir("parser")
+
 }
 
 
 object Paths {
 
   case object ProdPaths extends Paths {
-    override val root: String = ???
+    override val root: Directory = ???
   }
 
   case object DevPaths extends Paths {
-    override val root: String = "src/test/resources/data"
+    override val root: Directory = Directories.fromPath("src/test/resources/data")
   }
 
   object Implicits {

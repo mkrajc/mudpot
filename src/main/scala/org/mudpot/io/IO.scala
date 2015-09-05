@@ -20,6 +20,8 @@ trait Directory extends FSNode {
    */
   def createFile(filename: String): File
 
+  def createDir(dirname: String): Directory
+
 }
 
 trait File extends FSNode
@@ -45,6 +47,8 @@ trait FSNode {
 
   def getName: String
 
+  def getPath: String
+
   def isDirectory: Boolean
 
   def isFile: Boolean
@@ -66,6 +70,8 @@ private abstract class AbstractFSNode(private val javaFile: java.io.File) extend
   override def toUri: URI = javaFile.toURI
 
   override def toJavaFile: io.File = javaFile
+
+  override def getPath: String = javaFile.getAbsolutePath
 
 }
 
@@ -92,6 +98,7 @@ object Files {
     override def toString: String = s"File(${javaFile.getPath})"
 
     override def create(): Boolean = javaFile.createNewFile()
+
   }
 
 }
@@ -119,6 +126,8 @@ object Directories {
 
     override def createFile(filename: String): File = Files.fromFile(new io.File(toJavaFile, filename))
 
+    override def createDir(dirname: String): Directory = Directories.fromFile(new io.File(toJavaFile, dirname))
+
     override def files: List[File] = javaFile.listFiles().toList.filter(_.isFile).map(Files.fromFile)
 
     override def dirs: List[Directory] = javaFile.listFiles().toList.filter(_.isDirectory).map(Directories.fromFile)
@@ -139,8 +148,8 @@ object Directories {
     override def createFull(): Boolean = javaFile.mkdirs()
 
     override def create(): Boolean = javaFile.mkdir()
-  }
 
+  }
 
 }
 

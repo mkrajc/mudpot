@@ -22,9 +22,11 @@ trait ParsedInput {
   def values: Iterable[String]
 
   def value(arg: String): String
+
+  def pattern: Pattern
 }
 
-case class ParsedInputMap(argsMap: Map[String, String]) extends ParsedInput {
+case class ParsedInputMap(pattern: Pattern, argsMap: Map[String, String]) extends ParsedInput {
   override def value(arg: String): String = argsMap.getOrElse(arg, arg)
 
   override def values: Iterable[String] = argsMap.values

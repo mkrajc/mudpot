@@ -1,10 +1,10 @@
 package org.mudpot.path
 
 import org.mudpot.utils.FileUtils._
-import org.scalatest.FlatSpec
+import org.scalatest.{FlatSpec, Matchers}
 
 
-class UniquePathResolverTest extends FlatSpec {
+class UniquePathResolverTest extends FlatSpec with Matchers {
 
   import org.mudpot.conf.Paths.Implicits.development
 
@@ -15,9 +15,9 @@ class UniquePathResolverTest extends FlatSpec {
     val dir = pr.resolveToFile(path)
     val uniq = path.unique
 
-    val rel = relativePath(development.root, dir).filterNot(_ == '/')
+    val rel = relativePath(development.root.toJavaFile, dir.toJavaFile).filterNot(_ == '/')
 
-    assert(uniq.startsWith(rel), "relative path of returned file does not start as unique of path")
+    uniq should startWith(rel)
   }
 
 
