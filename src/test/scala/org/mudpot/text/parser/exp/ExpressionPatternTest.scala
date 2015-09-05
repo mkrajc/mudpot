@@ -28,7 +28,7 @@ class ExpressionPatternTest extends FlatSpec with Matchers {
     val pattern = new ExpressionPattern(List(Word("look"), Placeholder("object")))
     val input = Input("look")
     val matcher: Matcher = pattern.parse(input)
-    matcher shouldBe an [NoMatch.type]
+    matcher shouldBe an[NoMatch.type]
   }
 
   it should "order according to expression" in {
@@ -40,6 +40,11 @@ class ExpressionPatternTest extends FlatSpec with Matchers {
 
     val pats: List[Pattern] = List(look, take, give, nothing, lookUnder)
     pats.sorted should be(List(give, lookUnder, look, take, nothing))
+  }
+
+  it should "create the pattern from text" in {
+    val p = ExpressionPattern.from("something $big")
+    p.expressions should be(List(Word("something"), Placeholder("big")))
   }
 
 }
