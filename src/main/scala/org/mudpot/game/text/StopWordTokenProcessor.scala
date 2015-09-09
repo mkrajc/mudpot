@@ -2,7 +2,7 @@ package org.mudpot.game.text
 
 import org.mudpot.conf.{Filenames, Paths}
 import org.mudpot.io.{File, Loader}
-import org.mudpot.text.{InputProcessor, Input}
+import org.mudpot.text.{Input, InputProcessor}
 
 class StopWordTokenProcessor(val stopWords: List[String]) extends InputProcessor {
 
@@ -17,9 +17,9 @@ class FileStopWordTokenProcessor()(implicit val paths: Paths) extends InputProce
 
   private def loadStopWords(): List[String] = {
     val stopWordsFile: File = paths.parserDir.createFile(Filenames.stopWordsFile)
-    println("Loading stop words: " + stopWordsFile)
+    println(s"Loading stop words : " + stopWordsFile)
     val stops = Loader.loadSource(stopWordsFile).getLines().toList
-    println("Stop words: " + stops.mkString(","))
+    println(s"Stop words (${stops.size}): ${stops.mkString(",")}")
     stops
   }
 
