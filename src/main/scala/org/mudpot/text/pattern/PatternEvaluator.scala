@@ -1,4 +1,4 @@
-package org.mudpot.text.parser
+package org.mudpot.text.pattern
 
 import org.mudpot.text.Input
 import org.mudpot.utils.CollectionUtils

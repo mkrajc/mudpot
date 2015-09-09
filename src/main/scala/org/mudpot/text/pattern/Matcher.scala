@@ -1,4 +1,4 @@
-package org.mudpot.text.parser
+package org.mudpot.text.pattern
 
 trait Matcher {
   def matches: Boolean

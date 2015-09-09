@@ -1,4 +1,4 @@
-package org.mudpot.text.token
+package org.mudpot.text
 
 import java.util.regex.Pattern
 

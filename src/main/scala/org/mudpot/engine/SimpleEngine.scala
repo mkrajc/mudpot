@@ -1,11 +1,10 @@
 package org.mudpot.engine
 
-import org.mudpot.text.Input
-import org.mudpot.text.parser.PatternEvaluator
-import org.mudpot.text.token.TokenProcessor
+import org.mudpot.text.{InputProcessor, Input}
+import org.mudpot.text.pattern.PatternEvaluator
 
 
-class SimpleEngine(tokenProcessors: List[TokenProcessor], val patternEvaluator: PatternEvaluator) extends Engine with Commands {
+class SimpleEngine(tokenProcessors: List[InputProcessor], val patternEvaluator: PatternEvaluator) extends Engine with Commands {
   var commands: List[Command] = Nil
 
   override def handle(req: String): String = {

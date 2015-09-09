@@ -1,15 +1,16 @@
-package org.mudpot.text.token
+package org.mudpot.game.text
 
 import org.mudpot.conf.{Filenames, Paths}
 import org.mudpot.io.{File, Loader}
+import org.mudpot.text.{InputProcessor, Input}
 
-class StopWordTokenProcessor(val stopWords: List[String]) extends TokenProcessor {
+class StopWordTokenProcessor(val stopWords: List[String]) extends InputProcessor {
 
-  override def apply(tokens: List[String]): List[String] = tokens.filterNot(stopWords.contains)
+  override def apply(input: Input): Input = input.copy(tokens = input.tokens.filterNot(stopWords.contains))
 
 }
 
-class FileStopWordTokenProcessor()(implicit val paths: Paths) extends TokenProcessor {
+class FileStopWordTokenProcessor()(implicit val paths: Paths) extends InputProcessor {
 
   private val stopWords = loadStopWords()
   private val processor = new StopWordTokenProcessor(stopWords)
@@ -22,6 +23,6 @@ class FileStopWordTokenProcessor()(implicit val paths: Paths) extends TokenProce
     stops
   }
 
-  override def apply(tokens: List[String]): List[String] = processor(tokens)
+  override def apply(input: Input): Input = processor(input)
 
 }

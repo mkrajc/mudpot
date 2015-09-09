@@ -1,5 +1,4 @@
-package org.mudpot.text.parser
-
+package org.mudpot.text.pattern
 
 import org.mudpot.conf.{Filenames, Paths}
 import org.mudpot.io.Loader

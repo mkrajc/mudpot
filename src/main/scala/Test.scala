@@ -1,7 +1,6 @@
 
-
-import org.mudpot.text.parser.FilePatternLoader
-import org.mudpot.text.parser.exp.ExpressionPattern
+import org.mudpot.text.pattern.FilePatternLoader
+import org.mudpot.text.pattern.exp.ExpressionPattern
 
 object Test {
   def main(args: Array[String]) {

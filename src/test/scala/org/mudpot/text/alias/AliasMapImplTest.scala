@@ -1,5 +1,6 @@
 package org.mudpot.text.alias
 
+import org.mudpot.game.text.token.MapAliasMap
 import org.scalatest.{FlatSpec, Matchers}
 
 

@@ -1,4 +1,4 @@
-package org.mudpot.text.parser.exp
+package org.mudpot.text.pattern.exp
 
 trait Expression
 

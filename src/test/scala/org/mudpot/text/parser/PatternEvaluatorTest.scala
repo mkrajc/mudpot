@@ -2,7 +2,8 @@ package org.mudpot.text.parser
 
 
 import org.mudpot.text.Input
-import org.mudpot.text.parser.exp.{ExpressionPattern, Placeholder, Word}
+import org.mudpot.text.pattern.PatternEvaluator
+import org.mudpot.text.pattern.exp.{ExpressionPattern, Placeholder, Word}
 import org.scalatest.{FlatSpec, Matchers}
 
 class PatternEvaluatorTest extends FlatSpec with Matchers {

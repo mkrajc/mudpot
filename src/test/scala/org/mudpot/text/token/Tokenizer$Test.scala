@@ -1,5 +1,6 @@
 package org.mudpot.text.token
 
+import org.mudpot.text.Tokenizer
 import org.scalatest.{FlatSpec, Matchers}
 
 class Tokenizer$Test extends FlatSpec with Matchers{

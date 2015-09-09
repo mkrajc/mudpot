@@ -1,4 +1,4 @@
-package org.mudpot.text.alias
+package org.mudpot.game.text.token
 
 import scala.collection.mutable
 

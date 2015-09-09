@@ -1,20 +1,20 @@
 package org.mudpot.engine.cmd
 
 import org.mudpot.engine.Command
-import org.mudpot.text.Input
-import org.mudpot.text.parser.exp.ExpressionPattern
-import org.mudpot.text.parser.{FilePatternLoader, PatternEvaluator}
-import org.mudpot.text.token.{FileStopWordTokenProcessor, TokenProcessor}
+import org.mudpot.game.text.{FileAliasTokenProcessor, FileStopWordTokenProcessor}
+import org.mudpot.text.{InputProcessor, Input}
+import org.mudpot.text.pattern.exp.ExpressionPattern
+import org.mudpot.text.pattern.{FilePatternLoader, PatternEvaluator}
 
 trait CommandResolver {
   def resolve(input: Input): Command
 }
 
-class CommandResolverImpl(tokenProcessors: List[TokenProcessor],
+class CommandResolverImpl(inputProcessors: List[InputProcessor],
                           val patternEvaluator: PatternEvaluator) extends CommandResolver {
   override def resolve(input: Input): Command = {
-    val processedInput = tokenProcessors.foldLeft(input)(
-      (nextInput, processor) => nextInput.copy(tokens = processor(nextInput.tokens)))
+    val processedInput = inputProcessors.foldLeft(input)(
+      (nextInput, processor) => processor(nextInput))
     val parsedInput = patternEvaluator.evaluate(processedInput)
     parsedInput.map(pi => {
       println(pi)
@@ -29,10 +29,11 @@ object CommandResolverImpl {
     import org.mudpot.conf.Paths.Implicits.development
 
     val stop = new FileStopWordTokenProcessor
+    val alias = new FileAliasTokenProcessor
     val patterns = new FilePatternLoader(ExpressionPattern.from).load()
     val patternEvaluator = new PatternEvaluator(patterns)
-    val resolver = new CommandResolverImpl(List(stop), patternEvaluator)
-    resolver.resolve(Input("date"))
+    val resolver = new CommandResolverImpl(List(stop,alias), patternEvaluator)
+    resolver.resolve(Input("time"))
     resolver.resolve(Input("give the ring to the boy"))
   }
 }

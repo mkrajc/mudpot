@@ -1,7 +1,8 @@
 package org.mudpot.text.parser.exp
 
 import org.mudpot.text.Input
-import org.mudpot.text.parser.{Matcher, NoMatch, OkMatch, Pattern}
+import org.mudpot.text.pattern.exp.{ExpressionPattern, Placeholder, Word}
+import org.mudpot.text.pattern.{Matcher, NoMatch, OkMatch, Pattern}
 import org.scalatest.{FlatSpec, Matchers}
 
 class ExpressionPatternTest extends FlatSpec with Matchers {

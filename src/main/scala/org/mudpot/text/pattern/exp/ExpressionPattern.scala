@@ -1,8 +1,7 @@
-package org.mudpot.text.parser.exp
+package org.mudpot.text.pattern.exp
 
-import org.mudpot.text.Input
-import org.mudpot.text.parser._
-import org.mudpot.text.token.Tokenizer
+import org.mudpot.text.pattern._
+import org.mudpot.text.{Input, Tokenizer}
 
 case class ExpressionPattern(expressions: List[Expression]) extends Pattern {
   override def parse(input: Input): Matcher = {

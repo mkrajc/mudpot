@@ -3,9 +3,9 @@ package org.mudpot.engine.cmd
 import java.util.Date
 
 import org.mudpot.engine.{Command, SimpleEngine}
-import org.mudpot.text.parser.PatternEvaluator
-import org.mudpot.text.parser.exp.{ExpressionPattern, Placeholder, Word}
-import org.mudpot.text.token.StopWordTokenProcessor
+import org.mudpot.game.text.StopWordTokenProcessor
+import org.mudpot.text.pattern.PatternEvaluator
+import org.mudpot.text.pattern.exp.{ExpressionPattern, Placeholder, Word}
 
 
 class DateCommand extends Command {
