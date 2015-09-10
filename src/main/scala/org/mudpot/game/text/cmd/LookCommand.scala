@@ -9,4 +9,6 @@ case object LookCommand extends Command {
   override def execute(input: Input, arguments: Map[String, String]): Output = {
     Output("Looking at " + arguments.mkString(","))
   }
+
+  override def id: String = "look"
 }

@@ -24,8 +24,7 @@ class FileAliasTokenProcessor()(implicit val paths: Paths, implicit val filename
   private def loadAliasMap(): Map[String, String] = {
     val aliasFile: File = paths.parserDir.createFile(filenames.aliasFile)
     println("Loading alias map: " + aliasFile)
-    val prop = new Properties()
-    prop.load(Loader.loadInputStream(aliasFile))
+    val prop = Loader.loadProperties(aliasFile)
     val map = scala.collection.JavaConversions.propertiesAsScalaMap(prop).toMap
     println(s"Aliases (${map.size}): ${map.mkString("[",",","]")}")
     map

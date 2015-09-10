@@ -4,8 +4,14 @@ import org.mudpot.io.{Directories, Directory}
 
 trait Paths {
   def root: Directory
+
   def confDir: Directory = root.createDir("conf")
+
   def parserDir: Directory = confDir.createDir("parser")
+
+  def dataDir: Directory = root.createDir("data")
+
+  def objDir: Directory = dataDir.createDir("obj")
 
 }
 

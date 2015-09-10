@@ -8,7 +8,7 @@ case object UnknownCommand extends Command {
   override def execute(input: Input, arguments: Map[String, String]): Output =
     Output("unknown command " + input.original)
 
-
+  override def id: String = "unknown"
 }
 
 
