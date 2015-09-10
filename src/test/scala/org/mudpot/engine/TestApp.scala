@@ -8,12 +8,12 @@ import org.mudpot.text.pattern.{PatternEvaluator, FilePatternLoader}
 import org.mudpot.text.pattern.exp.ExpressionPattern
 
 import scala.io.StdIn
-
+import org.mudpot.conf.Paths.Implicits.development
+import org.mudpot.conf.Filenames.Implicits.defaults
 
 object TestApp {
 
-  import org.mudpot.conf.Paths.Implicits.development
-  import org.mudpot.conf.Filenames.Implicits.defaults
+
 
   val stop = new FileStopWordTokenProcessor
   val alias = new FileAliasTokenProcessor

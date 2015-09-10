@@ -26,9 +26,9 @@ trait FilePropertyObject extends PropertyObject {
 
 }
 
-abstract class PropertiesFilePropertyObject(implicit val paths: Paths) extends FilePropertyObject {
+abstract class PropertiesFilePropertyObject extends FilePropertyObject {
   override protected def load(location: Path): TypedProperties = {
-    val file = paths.objDir.createFile(location.toString + ".properties")
+    val file = Paths.Implicits.development.objDir.createFile(location.toString + ".properties")
     new PropertiesTypeProperties(Loader.loadProperties(file))
   }
 }
