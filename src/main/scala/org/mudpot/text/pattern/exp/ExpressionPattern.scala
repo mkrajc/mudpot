@@ -35,6 +35,11 @@ case class ExpressionPattern(expressions: List[Expression]) extends Pattern {
   override val arguments: List[String] = expressions.collect { case c: Placeholder => c.arg }
 
   override def toString: String = expressions.mkString(" ")
+
+  override def commandId: String = expressions.head match {
+    case Placeholder(arg) => arg
+    case Word(w) => w
+  }
 }
 
 object ExpressionPattern {

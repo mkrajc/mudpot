@@ -10,13 +10,13 @@ class StopWordTokenProcessor(val stopWords: List[String]) extends InputProcessor
 
 }
 
-class FileStopWordTokenProcessor()(implicit val paths: Paths) extends InputProcessor {
+class FileStopWordTokenProcessor()(implicit val paths: Paths, implicit val filenames: Filenames) extends InputProcessor {
 
   private val stopWords = loadStopWords()
   private val processor = new StopWordTokenProcessor(stopWords)
 
   private def loadStopWords(): List[String] = {
-    val stopWordsFile: File = paths.parserDir.createFile(Filenames.stopWordsFile)
+    val stopWordsFile: File = paths.parserDir.createFile(filenames.stopWordsFile)
     println(s"Loading stop words : " + stopWordsFile)
     val stops = Loader.loadSource(stopWordsFile).getLines().toList
     println(s"Stop words (${stops.size}): ${stops.mkString(",")}")

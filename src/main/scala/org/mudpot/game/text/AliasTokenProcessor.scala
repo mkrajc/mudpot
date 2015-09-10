@@ -16,13 +16,13 @@ class AliasTokenProcessor(val aliasMap: Map[String, String]) extends InputProces
 
 }
 
-class FileAliasTokenProcessor()(implicit val paths: Paths) extends InputProcessor {
+class FileAliasTokenProcessor()(implicit val paths: Paths, implicit val filenames: Filenames) extends InputProcessor {
 
   private val aliasMap = loadAliasMap()
   private val processor = new AliasTokenProcessor(aliasMap)
 
   private def loadAliasMap(): Map[String, String] = {
-    val aliasFile: File = paths.parserDir.createFile(Filenames.aliasFile)
+    val aliasFile: File = paths.parserDir.createFile(filenames.aliasFile)
     println("Loading alias map: " + aliasFile)
     val prop = new Properties()
     prop.load(Loader.loadInputStream(aliasFile))

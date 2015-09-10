@@ -9,4 +9,6 @@ trait Pattern extends Ordered[Pattern] {
 
   def arguments: List[String]
 
+  def commandId: String
+
 }
