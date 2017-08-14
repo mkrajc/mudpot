@@ -7,7 +7,7 @@ case class ExpressionPattern(expressions: List[Expression]) extends Pattern {
   override def parse(input: Input): Matcher = {
     if (expressions.length > input.tokens.length) NoMatch
     else {
-      val padded = expressions.padTo(math.max(expressions.length, input.tokens.length), Placeholder(""))
+      val padded = expressions.padTo(scala.math.max(expressions.length, input.tokens.length), Placeholder(""))
       val (words, placeholders) = padded.zip(input.tokens).partition {
         case (word: Word, token: String) => true
         case _ => false

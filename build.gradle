@@ -3,6 +3,7 @@ apply plugin: 'scala'
 
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -14,6 +15,10 @@ dependencies {
     compile 'io.netty:netty-all:4.0.31.Final'
     compile 'org.slf4j:slf4j-api:1.7.12'
     compile 'org.slf4j:slf4j-simple:1.7.12'
+    compile 'org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4'
+    compile 'org.scalaz.stream:scalaz-stream_2.11:0.8'
+    compile 'me.chrons:diode_2.11:0.1.0'
 
     testCompile 'org.scalatest:scalatest_2.11:2.2.5'
+    testCompile 'org.scalacheck:scalacheck_2.11:1.13.0-mk-SNAPSHOT'
 }

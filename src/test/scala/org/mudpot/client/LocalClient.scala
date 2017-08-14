@@ -5,9 +5,10 @@ import java.io.{BufferedReader, InputStreamReader}
 import io.netty.bootstrap.Bootstrap
 import io.netty.channel.local.LocalChannel
 import io.netty.channel.nio.NioEventLoopGroup
-import io.netty.channel.{Channel, ChannelFuture, ChannelInitializer, EventLoopGroup}
+import io.netty.channel._
 import io.netty.handler.logging.{LogLevel, LoggingHandler}
-import org.mudpot.server.netty.{NettyServer, LocalServerConfig}
+import org.mudpot.server.netty.NettyServer
+import org.mudpot.server.netty.local.LocalServerConfig
 
 
 object LocalClient {
@@ -33,7 +34,12 @@ object LocalClient {
       cb.group(clientGroup).channel(classOf[LocalChannel]).handler(new ChannelInitializer[LocalChannel]() {
         @throws(classOf[Exception])
         def initChannel(ch: LocalChannel) {
-          ch.pipeline.addLast(new LoggingHandler(LogLevel.INFO))
+          ch.pipeline.addLast(new LoggingHandler(LogLevel.DEBUG))
+          ch.pipeline().addLast(new SimpleChannelInboundHandler[String]() {
+            override def channelRead0(ctx: ChannelHandlerContext, msg: String): Unit = {
+              print(msg)
+            }
+          })
         }
       })
 

@@ -31,6 +31,6 @@ class TelnetServerInitializer(val sslCtx: Option[SslContext]) extends ChannelIni
 }
 
 object TelnetServerInitializer {
-  private[telnet] val decoder = new StringDecoder();
-  private[telnet] val encoder = new StringEncoder();
+  private[telnet] val decoder = new StringDecoder()
+  private[telnet] val encoder = new StringEncoder()
 }

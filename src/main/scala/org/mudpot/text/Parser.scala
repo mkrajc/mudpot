@@ -7,16 +7,18 @@ trait Parser {
   def parse(input: Input): Output
 }
 
-class SimpleParser(patternEvaluator: PatternEvaluator, commandResolver: CommandResolver, default: Command, processors: List[InputProcessor]) extends Parser {
+class SimpleParser(patternEvaluator: PatternEvaluator,
+                   commandResolver: CommandResolver, default: Command,
+                   inProcs: List[InputProcessor], outProcs: List[OutputProcessor]) extends Parser {
   override def parse(input: Input): Output = {
-    val next: Input = Input.process(input, processors)
+    val next: Input = Input.process(input, inProcs)
 
     val output: Option[Output] = for {
       in <- patternEvaluator.evaluate(next)
       cmd <- commandResolver.resolve(in.pattern.commandId)
     } yield cmd.execute(next, in.args)
 
-    output.getOrElse(default.execute(next, Map()))
-
+    val out = output.getOrElse(default.execute(next, Map()))
+    Output.process(out, outProcs)
   }
 }

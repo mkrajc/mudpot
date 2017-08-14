@@ -1,4 +1,6 @@
-package org.mudpot.text
+package org.mudpot.text.engine
+
+import org.mudpot.text.{Input, Parser}
 
 trait Engine {
   def handle(req: String): String

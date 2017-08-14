@@ -1,10 +1,12 @@
-package org.mudpot.server.netty
+package org.mudpot.server.netty.local
 
 import java.net.SocketAddress
 
 import io.netty.bootstrap.ChannelFactory
-import io.netty.channel.local.{LocalAddress, LocalChannel, LocalEventLoopGroup, LocalServerChannel}
 import io.netty.channel._
+import io.netty.channel.local.{LocalAddress, LocalChannel, LocalEventLoopGroup, LocalServerChannel}
+import org.mudpot.server.netty.{EngineChannelHandler, ServerConfig}
+import org.mudpot.text.engine.GlobalEngineFactory
 
 
 class LocalServerConfig extends ServerConfig {
@@ -14,17 +16,12 @@ class LocalServerConfig extends ServerConfig {
 
   override def childHandler: ChannelHandler = new ChannelInitializer[LocalChannel] {
     override def initChannel(ch: LocalChannel): Unit = {
-      ch.pipeline().addFirst(new ChannelInboundHandlerAdapter {
-        override def channelRead(ctx: ChannelHandlerContext, msg: scala.Any): Unit = {
-
-        }
-      })
+      ch.pipeline().addFirst(new EngineChannelHandler(GlobalEngineFactory))
     }
   }
 
   override def handler: ChannelHandler = new ChannelInitializer[LocalServerChannel] {
     override def initChannel(ch: LocalServerChannel): Unit = {
-
     }
   }
 
